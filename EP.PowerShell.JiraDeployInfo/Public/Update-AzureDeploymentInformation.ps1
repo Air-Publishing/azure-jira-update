@@ -120,7 +120,7 @@ function Update-AzureDeploymentInformation {
     )
 
     $jiraIds = @()
-    $jiraIds += (Get-JiraIDsFromAzureChanges -SystemAccessToken $SystemAccessToken -AzureChangeUrl $AzureChangeUrl)
+    $jiraIds += Get-DeployedTickets
 
     $splatVars = @{
         JiraDomain              = $JiraDomain
@@ -131,7 +131,7 @@ function Update-AzureDeploymentInformation {
         Description             = "Azure DevOps"
         Label                   = $Label
         DisplayName             = $DisplayName
-        Url                     = $Url
+        Url                     = $env:RELEASE_RELEASEWEBURL
         
         EnvironmentId           = $EnvironmentId
         EnvironmentType         = $EnvironmentType
@@ -139,7 +139,7 @@ function Update-AzureDeploymentInformation {
 
         PipelineId              = $PipelineId
         PipelineDisplayName     = $PipelineDisplayName
-        PipelineUrl             = $PipelineUrl
+        PipelineUrl             = $env:RELEASE_RELEASEWEBURL
 
         Product                 = "Azure DevOps"
     }
