@@ -15,7 +15,7 @@ function Update-AzureDeploymentInformation {
     .PARAMETER AtlassianClientSecret
     OAuth Client Secret for Atlassian which can be generated at https://companyname.atlassian.net/secure/admin/oauth-credentials - Defaults to $env:ATLASSIAN_CLIENT_SECRET if not set
     
-    .PARAMETER State
+    .PARAMETER State 
     The state to set the Jira deployment information to
     
     .PARAMETER EnvironmentType
