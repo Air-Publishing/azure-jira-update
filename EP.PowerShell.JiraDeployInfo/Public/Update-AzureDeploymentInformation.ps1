@@ -87,12 +87,12 @@ function Update-AzureDeploymentInformation {
         [Parameter(Mandatory=$false)]
         [ValidateNotNullOrEmpty()]
         [string]
-        $EnvironmentId = $env:ENVIRONMENT_ID,
+        $EnvironmentId = $env:RELEASE_ENVIRONMENTID,
 
         [Parameter(Mandatory=$false)]
         [ValidateNotNullOrEmpty()]
         [string]
-        $EnvironmentDisplayName = $env:ENVIRONMENT_NAME,
+        $EnvironmentDisplayName = $env:RELEASE_ENVIRONMENTNAME,
 
         [ValidateSet("Unmapped", "Development", "Testing", "Staging", "Production")]
         [string] $EnvironmentType = "Unmapped",
@@ -116,7 +116,7 @@ function Update-AzureDeploymentInformation {
         [string] $SystemAccessToken = $env:SYSTEM_ACCESSTOKEN,
 
         [Parameter(Mandatory=$false)][ValidateNotNullOrEmpty()]
-        [string] $AzureChangeUrl = "$env:SYSTEM_COLLECTIONURI/$env:SYSTEM_TEAMPROJECT/_traceability/runview/changes?currentRunId=$($env:BUILD_BUILDID)&__rt=fps"
+        [string] $AzureChangeUrl = "$env:SYSTEM_TASKDEFINITIONSURI/$env:SYSTEM_TEAMPROJECT/_traceability/runview/changes?currentRunId=$($env:BUILD_BUILDID)&__rt=fps"
     )
 
     $jiraIds = @()
