@@ -4,14 +4,17 @@ function Get-JiraIDsFromAzureChanges {
         [string] $SystemAccessToken,
 
         [Parameter(Mandatory=$false)][ValidateNotNullOrEmpty()]
-        [string] $AzureChangeUrl
+        [string] $AzureEnvironmentReleasesUrl,
+        
+        [Parameter(Mandatory=$false)][ValidateNotNullOrEmpty()]
+        [string] $AzureReleaseChangesUrl
     )
 
-    $jiraIDs = @()
-    Get-AzureDevopsBuildChanges -SystemAccessToken $SystemAccessToken -AzureChangeUrl $AzureChangeUrl | ForEach-Object {
+    $jiraIds = @()
+    Get-AzureReleaseDiff -SystemAccessToken $SystemAccessToken -AzureEnvironmentReleasesUrl $AzureEnvironmentReleasesUrl -AzureReleaseChangesUrl $AzureReleaseChangesUrl | ForEach-Object {
         Find-JiraIDs ($_) | ForEach-Object {
-            $jiraIDs += $_.Value.ToUpper()
+            $jiraIds += $_.Value.ToUpper()
         }
     }
-    $jiraIDs | Sort-object | Get-Unique -AsString
+    $jiraIds | Sort-object | Get-Unique -AsString
 }
