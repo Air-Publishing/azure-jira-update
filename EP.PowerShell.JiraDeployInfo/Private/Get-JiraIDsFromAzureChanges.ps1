@@ -11,7 +11,7 @@ function Get-JiraIDsFromAzureChanges {
     )
 
     $jiraIds = @()
-    Get-AzureDevopsReleaseEnvironmentChanges -SystemAccessToken $SystemAccessToken -AzureEnvironmentReleasesUrl $AzureEnvironmentReleasesUrl -AzureReleaseChangesUrl $AzureReleaseChangesUrl | ForEach-Object {
+    Get-AzureReleaseDiff -SystemAccessToken $SystemAccessToken -AzureEnvironmentReleasesUrl $AzureEnvironmentReleasesUrl -AzureReleaseChangesUrl $AzureReleaseChangesUrl | ForEach-Object {
         Find-JiraIDs ($_) | ForEach-Object {
             $jiraIds += $_.Value.ToUpper()
         }
