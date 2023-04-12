@@ -4,6 +4,6 @@ function Find-JiraIDs {
     )
     $pattern = '[A-Za-z]{2,10}-\d{1,4}'
     $values = [regex]::Matches($message, $pattern) | Select-Object value 
-    Write-Debug ("[JIRA IDs] " + $values)
+    Write-Host ("[JIRA IDs] " + $values)
     $values
 }
