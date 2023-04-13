@@ -1,6 +1,9 @@
 function Get-JiraIDsFromAzureChanges {
     param (
         [Parameter(Mandatory=$false)][ValidateNotNullOrEmpty()]
+        [string] $ReleaseId,
+        
+        [Parameter(Mandatory=$false)][ValidateNotNullOrEmpty()]
         [string] $SystemAccessToken,
 
         [Parameter(Mandatory=$false)][ValidateNotNullOrEmpty()]
@@ -11,7 +14,7 @@ function Get-JiraIDsFromAzureChanges {
     )
 
     $jiraIds = @()
-    Get-AzureReleaseDiff -SystemAccessToken $SystemAccessToken -AzureEnvironmentReleasesUrl $AzureEnvironmentReleasesUrl -AzureReleaseChangesUrl $AzureReleaseChangesUrl | ForEach-Object {
+    Get-AzureReleaseDiff -ReleaseId $ReleaseId -SystemAccessToken $SystemAccessToken -AzureEnvironmentReleasesUrl $AzureEnvironmentReleasesUrl -AzureReleaseChangesUrl $AzureReleaseChangesUrl | ForEach-Object {
         Find-JiraIDs ($_) | ForEach-Object {
             $jiraIds += $_.Value.ToUpper()
         }

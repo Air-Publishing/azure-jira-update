@@ -1,5 +1,8 @@
 ﻿function Get-AzureReleaseDiff {
     param (
+        [Parameter(Mandatory=$false)][ValidateNotNullOrEmpty()]
+        [string] $ReleaseId,
+        
         [Parameter(Mandatory=$true)][ValidateNotNullOrEmpty()]
         [string] $SystemAccessToken,
 
@@ -18,9 +21,8 @@
     Write-Host ("[Release IDs] " + $release_ids)
 
     $release_count = $release_ids.count
-    $this_release_id = $release_ids[0]
-    $previous_release_id = If ($release_count -eq 1) { $this_release_id } Else { $release_ids[1] }
-    $release_diff_url = $AzureReleaseChangesUrl -f $this_release_id, $previous_release_id
+    $previous_release_id = If ($release_count -eq 0) { $ReleaseId } Else { $release_ids[0] }
+    $release_diff_url = $AzureReleaseChangesUrl -f $ReleaseId, $previous_release_id
 
     Write-Host $release_diff_url
 

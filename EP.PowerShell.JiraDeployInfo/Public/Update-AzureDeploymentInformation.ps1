@@ -111,7 +111,12 @@ function Update-AzureDeploymentInformation {
         [ValidateNotNullOrEmpty()]
         [string]
         $PipelineUrl = "$env:SYSTEM_COLLECTIONURI/$env:SYSTEM_TEAMPROJECT/_build/?definitionId=$($env:SYSTEM_DEFINITIONID)",
-
+        
+        [Parameter(Mandatory=$false)]
+        [ValidateNotNullOrEmpty()]
+        [string]
+        $ReleaseId = $env:RELEASE_RELEASEID,
+        
         [Parameter(Mandatory=$false)][ValidateNotNullOrEmpty()]
         [string] $SystemAccessToken = $env:SYSTEM_ACCESSTOKEN,
 
@@ -126,7 +131,7 @@ function Update-AzureDeploymentInformation {
     )
 
     $jiraIds = @()
-    $jiraIds += (Get-JiraIDsFromAzureChanges -SystemAccessToken $SystemAccessToken -AzureEnvironmentReleasesUrl $AzureEnvironmentReleasesUrl -AzureReleaseChangesUrl $AzureReleaseChangesUrl)
+    $jiraIds += (Get-JiraIDsFromAzureChanges -ReleaseId $ReleaseId -SystemAccessToken $SystemAccessToken -AzureEnvironmentReleasesUrl $AzureEnvironmentReleasesUrl -AzureReleaseChangesUrl $AzureReleaseChangesUrl)
     Write-Host ("[Jira IDs] " + $jiraIds)
     
     Write-Host 
