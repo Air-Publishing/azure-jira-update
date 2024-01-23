@@ -124,7 +124,7 @@ function Update-AzureDeploymentInformation {
         [string] $AzureChangeUrl = "$env:SYSTEM_TASKDEFINITIONSURI/$env:SYSTEM_TEAMPROJECT/_traceability/runview/changes?currentRunId=$($env:BUILD_BUILDID)&__rt=fps",
 
         [Parameter(Mandatory=$false)][ValidateNotNullOrEmpty()]
-        [string] $AzureEnvironmentReleasesUrl = "$env:SYSTEM_COLLECTIONURI/$env:SYSTEM_TEAMPROJECT/_apis/Release/deployments?definitionId=$($env:RELEASE_DEFINITIONID)&definitionEnvironmentId=$($env:RELEASE_DEFINITIONENVIRONMENTID)&deploymentStatus=succeeded&operationStatus=all&latestAttemptsOnly=true&queryOrder=descending&top=2",
+        [string] $AzureEnvironmentReleasesUrl = "$env:SYSTEM_COLLECTIONURI/$env:SYSTEM_TEAMPROJECT/_apis/Release/deployments?definitionId=$($env:RELEASE_DEFINITIONID)&definitionEnvironmentId=$($env:RELEASE_DEFINITIONENVIRONMENTID)&deploymentStatus=succeeded,partiallySucceeded&operationStatus=all&latestAttemptsOnly=true&queryOrder=descending&top=2",
 
         [Parameter(Mandatory=$false)][ValidateNotNullOrEmpty()]
         [string] $AzureReleaseChangesUrl = "$env:SYSTEM_COLLECTIONURI/$env:SYSTEM_TEAMPROJECT/_apis/Release/releases/{0}/changes?baseReleaseId={1}&top=2500"
